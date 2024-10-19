@@ -1,4 +1,3 @@
-// ./components/LoginPage.tsx
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -7,14 +6,8 @@ import { Navbar } from "@/components/ui/Navbar";
 import { Card } from "@/components/ui/card2";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import ClientComponent from "@/components/ClientComponent";
 
-interface LoginPageProps {
-  configKey?: string;
-  accessToken: string;
-}
-
-export default function LoginPage({ configKey, accessToken }: LoginPageProps) { 
+export default function Page() {
   // State variables
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [timer, setTimer] = useState(0);
@@ -112,7 +105,7 @@ export default function LoginPage({ configKey, accessToken }: LoginPageProps) {
         mediaStream.getTracks().forEach((track) => track.stop());
       }
     };
-  }, [selectedCameraId, mediaStream]);
+  }, [selectedCameraId]);
 
   // Handlers
   const handleSpeakToggle = () => {
@@ -266,11 +259,6 @@ export default function LoginPage({ configKey, accessToken }: LoginPageProps) {
           </div>
         </div>
       </div>
-      {/* Integrate the updated ClientComponent */}
-      <ClientComponent
-        configKey={configKey}
-        accessToken={accessToken}
-      />
     </>
   );
 }
