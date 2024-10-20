@@ -239,7 +239,7 @@ export default function UnifiedChatComponent() {
         {
           role: "user",
           content:
-            "Based on the content of this PDF, generate 5 precise and important questions that cover the main topics discussed in the document. Ensure the questions are specific and directly related to the key information presented in the PDF.",
+            "Based on the content of this PDF, generate precise and important questions that cover the main topics discussed in the document. Ensure the questions are specific and directly related to the key information presented in the PDF.",
         },
       ],
     };
@@ -294,7 +294,7 @@ export default function UnifiedChatComponent() {
       const latestMessage = voiceMessages[voiceMessages.length - 1];
       setCombinedMessages((prev) => [
         ...prev,
-        { type: "voice", content: Object.keys(latestMessage).toString() },
+        { type: "voice", content: latestMessage.content },
       ]);
     }
   }, [voiceMessages]);
@@ -393,14 +393,7 @@ export default function UnifiedChatComponent() {
                             )}
                           </>
                         ) : (
-                          <div
-                            className="w-full h-full bg-gray-700"
-                            style={{
-                              backgroundImage: `url('../public/images/AIHuman (${i}).jpeg')`,
-                              backgroundSize: "cover",
-                              backgroundPosition: "center",
-                            }}
-                          ></div>
+                          <div className="w-full h-full bg-gray-700"></div>
                         )}
                       </Card>
                     ))}
@@ -505,7 +498,7 @@ export default function UnifiedChatComponent() {
                 {/* PDF Upload */}
                 <div className="flex flex-col space-y-2">
                   <Label htmlFor="fileInput" className="text-sm font-semibold">
-                    Add PDF For Questions
+                    Add PDF for ChatPDF
                   </Label>
                   <div className="flex items-center space-x-2">
                     <input
