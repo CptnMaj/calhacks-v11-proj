@@ -15,7 +15,9 @@ export default function Page() {
   const [generatedText, setGeneratedText] = useState("");
   const [mediaStream, setMediaStream] = useState<MediaStream | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [availableCameras, setAvailableCameras] = useState<MediaDeviceInfo[]>([]);
+  const [availableCameras, setAvailableCameras] = useState<MediaDeviceInfo[]>(
+    []
+  );
   const [selectedCameraId, setSelectedCameraId] = useState<string>("");
 
   // Refs for video element
@@ -132,13 +134,13 @@ export default function Page() {
   return (
     <>
       <Navbar />
-      <div className="container relative h-screen md:flex md:flex-row lg:grid lg:max-w-full lg:grid-cols-[3.5fr_1.5fr] lg:px-0">
+      <div className="container relative h-screen md:flex md:flex-row lg:grid lg:max-w-full lg:grid-cols-[3fr_1.5fr] lg:px-0">
         {/* Sidebar Section */}
-        <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
+        <div className="relative hidden h-full flex-col bg-muted p-6 text-white dark:border-r lg:flex">
           <div className="absolute inset-0 bg-zinc-900" />
           <div className="relative z-20 flex flex-col h-full">
             {/* Top Grid of Cards */}
-            <div className="flex-grow grid grid-cols-3 gap-4 mb-4">
+            <div className="flex-grow grid grid-cols-3 gap-3 mb-3">
               {[...Array(9)].map((_, i) => (
                 <Card
                   ref={i === 0 ? firstCardRef : null}
@@ -149,7 +151,7 @@ export default function Page() {
                     // Embed the webcam video in the first card
                     <>
                       {error ? (
-                        <p className="text-red-500 text-sm">{error}</p>
+                        <p className="text-red-500 text-xs">{error}</p>
                       ) : (
                         <video
                           ref={videoRef}
@@ -168,28 +170,28 @@ export default function Page() {
               ))}
             </div>
             {/* Bottom Controls */}
-            <div className="flex flex-col space-y-2">
+            <div className="flex flex-col space-y-1">
               {/* Speak, Restart, Timer Controls */}
-              <div className="flex space-x-2">
+              <div className="flex space-x-1">
                 <Button
                   variant={isSpeaking ? "destructive" : "outline"}
-                  className="text-sm px-4 py-2 bg-zinc-900"
+                  className="text-xs px-3 py-1 bg-zinc-900"
                   onClick={handleSpeakToggle}
                 >
                   {isSpeaking ? "Stop Speaking" : "Speak"}
                 </Button>
                 <Button
                   variant="outline"
-                  className="text-sm px-4 py-2 bg-zinc-900"
+                  className="text-xs px-3 py-1 bg-zinc-900"
                   onClick={handleRestart}
                 >
                   Restart
                 </Button>
-                <div className="flex gap-3">
+                <div className="flex gap-2">
                   <Input
                     type="number"
-                    placeholder="Timer (minutes)"
-                    className="text-sm px-4 py-2 w-40 text-zinc-900"
+                    placeholder="Timer (min)"
+                    className="text-xs px-3 py-1 w-28 text-zinc-900"
                     onChange={(e) =>
                       setTimer(parseInt(e.target.value) * 60 || 0)
                     }
@@ -200,7 +202,7 @@ export default function Page() {
                       onClick={handleTimerStart}
                       variant="outline"
                       disabled={timer === 0}
-                      className="text-sm px-4 py-2 bg-zinc-900"
+                      className="text-xs px-3 py-1 bg-zinc-900"
                     >
                       Start Timer
                     </Button>
@@ -208,7 +210,7 @@ export default function Page() {
                     <Button
                       onClick={() => setIsTimerRunning(false)}
                       variant="outline"
-                      className="text-sm px-4 py-2 bg-red-600"
+                      className="text-xs px-3 py-1 bg-red-600"
                     >
                       Stop Timer
                     </Button>
@@ -216,15 +218,15 @@ export default function Page() {
                 </div>
               </div>
               {/* Camera Chooser */}
-              <div className="flex flex-col space-y-2 mt-4">
-                <Label htmlFor="cameraSelect" className="text-center text-xl">
+              <div className="flex flex-col space-y-1 mt-3">
+                <Label htmlFor="cameraSelect" className="text-center text-lg">
                   Select Camera
                 </Label>
                 <select
                   id="cameraSelect"
                   value={selectedCameraId}
                   onChange={handleCameraChange}
-                  className="text-sm px-4 py-2 bg-zinc-800 text-white rounded-md"
+                  className="text-xs px-3 py-1 bg-zinc-800 text-white rounded-md"
                 >
                   {availableCameras.map((camera) => (
                     <option key={camera.deviceId} value={camera.deviceId}>
@@ -234,8 +236,8 @@ export default function Page() {
                 </select>
               </div>
               {/* Add Slides Section */}
-              <div className="flex flex-col space-y-2 mt-4">
-                <Label htmlFor="Slides" className="text-center text-xl">
+              <div className="flex flex-col space-y-1 mt-3">
+                <Label htmlFor="Slides" className="text-center text-lg">
                   Add Slides (.pdf, .txt, .pptx)
                 </Label>
                 <Input id="Slides" type="file" accept=".pdf, .txt, .pptx" />
@@ -244,10 +246,10 @@ export default function Page() {
           </div>
         </div>
         {/* Main Content Section */}
-        <div className="lg:p-8 h-screen flex flex-col items-center justify-center bg-white">
-          <div className="w-full max-w-md space-y-4">
+        <div className="lg:p-6 h-screen flex flex-col items-center justify-center bg-white">
+          <div className="w-full max-w-md space-y-3">
             {generatedText && (
-              <Card className="h-screen p-4 bg-gray-100">
+              <Card className="h-screen p-3 bg-gray-100">
                 <textarea
                   className="w-full h-full p-2 border border-gray-300 rounded-md resize-none"
                   value={generatedText}

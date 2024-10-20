@@ -1,10 +1,10 @@
 // ./components/Messages.tsx
-"use client"; 
+"use client";
 import { useVoice } from "@humeai/voice-react";
 
 export default function Messages() {
   const { messages } = useVoice();
-  
+
   return (
     <div>
       {messages.map((msg, index) => {

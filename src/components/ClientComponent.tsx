@@ -9,11 +9,14 @@ export default function ClientComponent({
   configKey,
 }: {
   accessToken: string;
-  configKey?: string,
+  configKey?: string;
 }) {
-  console.log(configKey)
+  console.log(configKey);
   return (
-    <VoiceProvider configId={configKey} auth={{ type: "accessToken", value: accessToken }}>
+    <VoiceProvider
+      configId={configKey}
+      auth={{ type: "accessToken", value: accessToken }}
+    >
       <Messages />
       <Controls />
     </VoiceProvider>

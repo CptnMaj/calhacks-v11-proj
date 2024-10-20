@@ -8,9 +8,14 @@ export default async function Page() {
     apiKey: String(process.env.HUME_API_KEY),
     secretKey: String(process.env.HUME_SECRET_KEY),
   });
-  
+
   if (!accessToken) {
     throw new Error();
   }
-  return <ClientComponent configKey={process.env.HUME_CONFIG_KEY} accessToken={accessToken} />;
+  return (
+    <ClientComponent
+      configKey={process.env.HUME_CONFIG_KEY}
+      accessToken={accessToken}
+    />
+  );
 }

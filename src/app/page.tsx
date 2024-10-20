@@ -1,18 +1,18 @@
-'use client'
+"use client";
 
 // pages/index.tsx
-import { motion } from 'framer-motion';
-import React from 'react';
-import Head from 'next/head';
-import Link from 'next/link';
+import { motion } from "framer-motion";
+import React from "react";
+import Head from "next/head";
+import Link from "next/link";
 
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
-import { Container } from '@/components/ui/Container';
-import { Navbar } from '@/components/ui/Navbar';
-import { Footer } from '@/components/ui/Footer';
-import { Button } from '@/components/ui/Button';
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card";
+import { Container } from "@/components/ui/Container";
+import { Navbar } from "@/components/ui/Navbar";
+import { Footer } from "@/components/ui/Footer";
+import { Button } from "@/components/ui/Button";
 
-import Image from 'next/image'
+import Image from "next/image";
 
 // import styled from 'styled-components';
 
@@ -24,40 +24,40 @@ interface Feature {
 
 const features: Feature[] = [
   {
-    title: 'Interactive Q&A Sessions',
+    title: "Interactive Q&A Sessions",
     description:
-      'Engage with AI-driven questions based on your presentation content to prepare for any audience.',
-    icon: '🗣️',
+      "Engage with AI-driven questions based on your presentation content to prepare for any audience.",
+    icon: "🗣️",
   },
   {
-    title: 'Heckling and De-escalation Training',
+    title: "Heckling and De-escalation Training",
     description:
-      'Learn effective strategies to handle aggressive viewers and maintain composure during presentations.',
-    icon: '🛡️',
+      "Learn effective strategies to handle aggressive viewers and maintain composure during presentations.",
+    icon: "🛡️",
   },
   {
-    title: 'Real-Time Feedback',
+    title: "Real-Time Feedback",
     description:
-      'Receive instant tips and guidance to improve your delivery and performance on the fly.',
-    icon: '⏱️',
+      "Receive instant tips and guidance to improve your delivery and performance on the fly.",
+    icon: "⏱️",
   },
   {
-    title: 'Presentation Timer',
+    title: "Presentation Timer",
     description:
-      'Manage your presentation time efficiently with a built-in countdown and warnings.',
-    icon: '⏰',
+      "Manage your presentation time efficiently with a built-in countdown and warnings.",
+    icon: "⏰",
   },
   {
-    title: 'Extended Communication Skills',
+    title: "Extended Communication Skills",
     description:
-      'Enhance your ability to hold longer conversations, initiate dialogues, and resolve conflicts.',
-    icon: '💬',
+      "Enhance your ability to hold longer conversations, initiate dialogues, and resolve conflicts.",
+    icon: "💬",
   },
   {
-    title: 'Voice and Video Recording',
+    title: "Voice and Video Recording",
     description:
-      'Record your presentations to review and analyze your performance for continuous improvement.',
-    icon: '🎥',
+      "Record your presentations to review and analyze your performance for continuous improvement.",
+    icon: "🎥",
   },
 ];
 
@@ -144,8 +144,9 @@ const Home: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
-              Overcome public speaking anxiety, master interactive Q&A sessions, handle hecklers, and receive
-              real-time feedback to deliver impactful presentations every time.
+              Overcome public speaking anxiety, master interactive Q&A sessions,
+              handle hecklers, and receive real-time feedback to deliver
+              impactful presentations every time.
             </motion.p>
             <motion.div
               initial={{ opacity: 0 }}
@@ -158,7 +159,8 @@ const Home: React.FC = () => {
                 </Button>
               </Link>
             </motion.div>
-          </Container>        </section>
+          </Container>{" "}
+        </section>
 
         {/* Features Section */}
         <section className="py-20 bg-gray-100">
@@ -186,8 +188,8 @@ const Home: React.FC = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                Vocis offers a comprehensive suite of tools designed to enhance every aspect of your presentation
-                skills.
+                Vocis offers a comprehensive suite of tools designed to enhance
+                every aspect of your presentation skills.
               </motion.p>
             </motion.div>
             <motion.div
@@ -204,7 +206,9 @@ const Home: React.FC = () => {
                       {feature.icon}
                     </CardHeader>
                     <CardContent>
-                      <CardTitle className="text-xl font-semibold mb-2">{feature.title}</CardTitle>
+                      <CardTitle className="text-xl font-semibold mb-2">
+                        {feature.title}
+                      </CardTitle>
                       <p className="text-gray-600">{feature.description}</p>
                     </CardContent>
                   </Card>
@@ -231,7 +235,8 @@ const Home: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Join Vocis today and start your journey towards becoming a confident and effective presenter.
+              Join Vocis today and start your journey towards becoming a
+              confident and effective presenter.
             </motion.p>
             <motion.div
               initial={{ opacity: 0 }}
@@ -247,7 +252,12 @@ const Home: React.FC = () => {
           </Container>
         </section>
 
-        <Image src="https://thispersondoesnotexist.com" width={300} height={300} alt=''></Image>
+        <Image
+          src="https://thispersondoesnotexist.com"
+          width={300}
+          height={300}
+          alt=""
+        ></Image>
         {/* Upload Slides Section */}
         {/* <section className="py-20 bg-white">
           <Container>
