@@ -1,14 +1,17 @@
-// frontend/components/PresentationModeSelector.tsx
+"use client";
 
-'use client'
-
-import { useState } from "react"
-import { useRouter } from 'next/navigation'
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Card, CardContent } from "@/components/ui/card2";
+import { Switch } from "@/components/ui/switch";
+import { Button } from "@/components/ui/button2";
+import { CheckSquare } from "lucide-react";
+import { Navbar } from "@/components/ui/Navbar";
 
 export default function PresentationModeSelector() {
-  const [isLivePresentation, setIsLivePresentation] = useState(false)
-  const [selectedScenarios, setSelectedScenarios] = useState<string[]>([])
-  const router = useRouter()
+  const [isLivePresentation, setIsLivePresentation] = useState(false);
+  const [selectedScenarios, setSelectedScenarios] = useState<string[]>([]);
+  const router = useRouter();
 
   const scenarios = [
     "Introduction",
@@ -17,91 +20,86 @@ export default function PresentationModeSelector() {
     "Technical Deep Dive",
     "Customer Testimonial",
     "De-escalation",
-    "Closing Remarks"
-  ]
+    "Closing Remarks",
+  ];
 
   const handleScenarioToggle = (scenario: string) => {
-    setSelectedScenarios(prev =>
+    setSelectedScenarios((prev) =>
       prev.includes(scenario)
-        ? prev.filter(s => s !== scenario)
+        ? prev.filter((s) => s !== scenario)
         : [...prev, scenario]
-    )
-  }
+    );
+  };
 
   const handleSubmit = () => {
-    if (!isLivePresentation || selectedScenarios.length === 0) {
-      // Shouldn't happen due to button disabling, but added as a safety
-      return
+    // Ensure live presentation is selected and "Q&A Session" is part of selected scenarios
+    if (isLivePresentation && selectedScenarios.includes("Q&A Session")) {
+      const query =
+        selectedScenarios.length > 0
+          ? `?scenarios=${selectedScenarios.join(",")}`
+          : "";
+
+      // Navigate to main.tsx with the query
+      router.push(`/main${query}`);
     }
-
-    console.log(`Submitting: Live-Presentation - ${isLivePresentation}, Scenarios - ${selectedScenarios.join(", ")}`)
-    
-    // Construct the query string based on selected scenarios
-    const query = selectedScenarios.length > 0
-      ? `?scenarios=${selectedScenarios.join(",")}`
-      : ""
-
-    // Navigate to the main presentation page with selected scenarios as query parameters
-    router.push(`/main${query}`)
-  }
+  };
 
   return (
-    <div className="max-w-2xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-      <div className="p-6">
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Presentation Mode Selector</h2>
-        <div className="space-y-6">
-          {/* Live-Presentation Toggle */}
-          <div className="flex justify-between items-center">
-            <span className="text-lg font-medium text-gray-700">Live-Presentation</span>
-            <button
-              onClick={() => setIsLivePresentation(!isLivePresentation)}
-              className={`relative inline-flex items-center h-6 rounded-full w-11 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-                isLivePresentation ? 'bg-blue-600' : 'bg-gray-200'
-              }`}
-              aria-pressed={isLivePresentation}
-              aria-label="Toggle Live Presentation"
-            >
-              <span
-                className={`transform bg-white border border-gray-300 rounded-full h-4 w-4 transition-transform ${
-                  isLivePresentation ? 'translate-x-6' : 'translate-x-1'
-                }`}
-              />
-            </button>
-          </div>
+    <>
+      <Navbar />
+      <div className="max-w-4xl mx-auto p-6 my-24 bg-background">
+        <h2 className="text-3xl font-bold text-center mb-8">
+          Presentation Mode Selector
+        </h2>
 
-          {/* Scenarios Selection */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {scenarios.map((scenario) => (
-              <label
-                key={scenario}
-                className="flex items-center space-x-3 cursor-pointer"
+        <Card className="mb-8">
+          <CardContent className="p-6">
+            <div className="flex justify-between items-center">
+              <span className="text-xl font-medium">Live-Presentation</span>
+              <Switch
+                checked={isLivePresentation}
+                onCheckedChange={setIsLivePresentation}
+                aria-label="Toggle Live Presentation"
+              />
+            </div>
+          </CardContent>
+        </Card>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+          {scenarios.map((scenario) => (
+            <div
+              key={scenario}
+              onClick={() => handleScenarioToggle(scenario)}
+              className="cursor-pointer"
+            >
+              <Card
+                className={`h-full transition-all ${
+                  selectedScenarios.includes(scenario)
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-card hover:bg-accent hover:text-accent-foreground"
+                }`}
               >
-                <input
-                  type="checkbox"
-                  checked={selectedScenarios.includes(scenario)}
-                  onChange={() => handleScenarioToggle(scenario)}
-                  className="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 border-gray-300"
-                />
-                <span className="text-gray-700">{scenario}</span>
-              </label>
-            ))}
-          </div>
+                <CardContent className="p-4 flex items-center justify-between">
+                  <span className="text-lg font-medium">{scenario}</span>
+                  {selectedScenarios.includes(scenario) && (
+                    <CheckSquare className="h-6 w-6" />
+                  )}
+                </CardContent>
+              </Card>
+            </div>
+          ))}
         </div>
-      </div>
-      <div className="px-6 py-4 bg-gray-50">
-        <button
+
+        <Button
           onClick={handleSubmit}
-          className={`w-full flex justify-center items-center py-3 px-4 bg-blue-600 text-white text-lg font-semibold rounded-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
-            selectedScenarios.length === 0 || !isLivePresentation
-              ? 'opacity-50 cursor-not-allowed'
-              : ''
-          }`}
-          disabled={selectedScenarios.length === 0 || !isLivePresentation}
-          aria-disabled={selectedScenarios.length === 0 || !isLivePresentation}
+          className="w-full py-6 text-lg font-semibold"
+          disabled={
+            !isLivePresentation || !selectedScenarios.includes("Q&A Session")
+          }
         >
           Submit
-        </button>
+        </Button>
       </div>
-    </div>
-  )
+    </>
+  );
 }

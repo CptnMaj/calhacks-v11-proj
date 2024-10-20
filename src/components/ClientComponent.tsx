@@ -11,7 +11,6 @@ export default function ClientComponent({
   accessToken: string;
   configKey?: string;
 }) {
-  console.log(configKey);
   return (
     <VoiceProvider
       configId={configKey}
