@@ -393,7 +393,14 @@ export default function UnifiedChatComponent() {
                             )}
                           </>
                         ) : (
-                          <div className="w-full h-full bg-gray-700"></div>
+                          <div
+                            className="w-full h-full bg-gray-700"
+                            style={{
+                              backgroundImage: `url('../public/images/AIHuman (${i}).jpeg')`,
+                              backgroundSize: "cover",
+                              backgroundPosition: "center",
+                            }}
+                          ></div>
                         )}
                       </Card>
                     ))}
